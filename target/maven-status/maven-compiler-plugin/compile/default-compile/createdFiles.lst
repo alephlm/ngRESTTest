@@ -1,0 +1,7 @@
+com/controllers/CompanyController.class
+com/Application.class
+com/domain/Company.class
+com/repositories/CompanyRepository.class
+com/domain/BeneficialOwner.class
+com/services/CompanyServiceImpl.class
+com/services/CompanyService.class

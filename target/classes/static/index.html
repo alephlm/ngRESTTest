@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html ng-app="testREST">
+<head>
+
+<meta charset="utf-8">
+<title>REST TEST</title>
+
+<!-- Bootstrap -->
+<link href="js/plugins/bootstrap-3.3.6-dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="page-header">
+			<h1>Company REST Angular</h1>
+		</div>
+		<div ng-controller="CompanyController as companyCtrl" ng-cloak
+			class="ng-cloak" ng-init="companyCtrl.getAllCompanies()">
+
+			<div class="col-md-6">
+				<div class="row">
+					<div class="col-md-12" ng-show="companyCtrl.showCompanyForm">
+						<form name="CompanyForm"
+							ng-submit="companyCtrl.saveCompany(companyCtrl.company)">
+							<div class="form-group">
+								<label for="companyName">Company Name</label> <input type="text"
+									class="form-control" required id="companyName"
+									ng-model="companyCtrl.company.name">
+							</div>
+
+							<div class="form-group">
+								<label for="companyAddress">Address</label> <input type="text"
+									class="form-control" required id="companyAddress"
+									ng-model="companyCtrl.company.address">
+							</div>
+
+							<div class="form-group">
+								<label for="companyCountry">Country</label> <input type="text"
+									class="form-control" required id="companyCountry"
+									ng-model="companyCtrl.company.country">
+							</div>
+
+							<div class="form-group">
+								<label for="companyCity">City</label> <input type="text"
+									class="form-control" required id="companyCity"
+									ng-model="companyCtrl.company.city">
+							</div>
+
+							<div class="form-group">
+								<label for="companyPhoneNumber">Phone Number</label> <input
+									type="text" class="form-control" id="companyPhoneNumber"
+									ng-model="companyCtrl.company.phoneNumber">
+							</div>
+
+							<div class="form-group">
+								<label for="exampleInputEmail1">Email address</label> <input
+									type="email" class="form-control" id="exampleInputEmail1"
+									ng-model="companyCtrl.company.email">
+							</div>
+
+							<button class="btn btn-primary">Save Company</button>
+							<a class="btn btn-default" ng-click="companyCtrl.cancelEdit()">Cancel</a>
+						</form>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<button ng-show="!companyCtrl.showCompanyForm"
+								ng-click="companyCtrl.addNewCompany()"
+								class="btn btn-primary table">Add New Company</button>
+						</div>
+						<div class="list-group">
+							<a href="" ng-click="companyCtrl.loadCompanyDetails(company)"
+								ng-repeat="company in companyCtrl.allCompanies  | orderBy:'id'"
+								class="list-group-item"> <span
+								ng-click="companyCtrl.editCompany(company)"
+								class="btn btn-primary btn-sm" style="float: right;">
+									edit </span>
+								<h4 class="list-group-item-heading">{{company.name}}</h4>
+								<p class="list-group-item-text">{{company.address}} -
+									{{company.country}} - {{company.city}}</p>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="list-group">
+
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							<h3 class="panel-title">Company Details</h3>
+						</div>
+						<div class="panel-body" ng-show="companyCtrl.company.id">
+							<div class="col-xs-6">
+								<address>
+									<strong>{{companyCtrl.company.name}}</strong> <br>
+									{{companyCtrl.company.address}} -
+									{{companyCtrl.company.country}} - {{companyCtrl.company.city}}
+									<br>
+								</address>
+
+								<address>
+									<strong>Contacts</strong> <br> <a href="mailto:#">{{companyCtrl.company.email}}</a>
+									<br> <abbr ng-show="companyCtrl.company.phoneNumber"
+										title="Phone">P:</abbr> {{companyCtrl.company.phoneNumber}}
+								</address>
+							</div>
+							<div class="col-xs-6">
+								<h4>Beneficial Owners</h4>
+								<ul>
+									<li
+										ng-repeat="bo in companyCtrl.company.beneficialOwners | orderBy:'id'">
+										{{bo.name}}</li>
+								</ul>
+								<form name="OwnerForm"
+									ng-submit="companyCtrl.addBeneficialOwner(companyCtrl.owner)">
+									<div class="form-group">
+										<input type="text" class="form-control" required
+											placeholder="Owner Name" ng-model="companyCtrl.owner.name">
+									</div>
+									<button class="btn btn-default">Add Owner</button>
+								</form>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- AngularJS -->
+	<script src="js/plugins/angular.min.js"></script>
+	<!-- jQuery and Bootstrap -->
+	<script src="js/plugins/jquery-2.2.0.js"></script>
+	<script src="js/plugins/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+	<!-- Anglar App Script -->
+	<script src="js/app.js"></script>
+	<script src="js/factories.js"></script>
+	<script src="js/controllers.js"></script>
+</body>
+</html>
